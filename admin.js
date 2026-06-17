@@ -507,15 +507,29 @@ const photoPreviewImg = document.getElementById('photoPreviewImg');
 const photoPlaceholder = document.getElementById('photoPlaceholder');
 const photoUploadArea = document.getElementById('photoUploadArea');
 
+// 统一的打开文件选择器方法
+function openFileChooser() {
+    // 使用 setTimeout 确保在用户交互的同步上下文之外也能工作
+    setTimeout(() => {
+        photoInput.value = ''; // 清除之前的值，确保 change 事件能触发
+        photoInput.click();
+    }, 0);
+}
+
 // 点击上传按钮 → 打开文件选择器
-photoUploadBtn.addEventListener('click', () => {
-    photoInput.click();
+photoUploadBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openFileChooser();
 });
 
 // 点击预览区域也可以打开文件选择器
 photoUploadArea.addEventListener('click', (e) => {
-    if (e.target.closest('.photo-actions')) return; // 不拦截按钮点击
-    photoInput.click();
+    // 不拦截按钮区域的点击
+    if (e.target.closest('.photo-actions') || e.target.closest('button')) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openFileChooser();
 });
 
 // 文件选择后处理
