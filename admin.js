@@ -47,7 +47,8 @@ const DEFAULT_DATA = {
         { icon: '🐙', name: 'GitHub', link: '#' },
         { icon: '📝', name: '博客', link: '#' }
     ],
-    footerCopyright: '© 2024 袁思伟 | 用 ❤️ 和 ☕ 制作'
+    footerCopyright: '© 2024 袁思伟 | 用 ❤️ 和 ☕ 制作',
+    avatar: '' // Base64 编码的照片，默认为空（使用占位符SVG）
 };
 
 // === 获取当前数据 ===
@@ -168,6 +169,9 @@ function loadFormData() {
 
     // 底部
     setFieldInput('footerCopyright', data.footerCopyright);
+
+    // 头像照片
+    loadAvatarPreview();
 }
 
 function setFieldInput(field, value) {
@@ -448,6 +452,9 @@ function collectFormData() {
     // 底部
     data.footerCopyright = getFieldValue('footerCopyright');
 
+    // 头像照片（保存在内存中，非表单字段）
+    data.avatar = currentAvatarData;
+
     return data;
 }
 
@@ -485,8 +492,112 @@ navItems.forEach(item => {
 // === 预览按钮更新标题 ===
 document.getElementById('previewBtn').addEventListener('click', (e) => {
     e.preventDefault();
-    // 先保存数据再跳转
     const data = collectFormData();
     saveData(data);
     window.open('index.html', '_blank');
 });
+
+// === 照片上传功能 ===
+let currentAvatarData = ''; // 临时存储当前头像数据
+
+const photoInput = document.getElementById('photoInput');
+const photoUploadBtn = document.getElementById('photoUploadBtn');
+const photoRemoveBtn = document.getElementById('photoRemoveBtn');
+const photoPreviewImg = document.getElementById('photoPreviewImg');
+const photoPlaceholder = document.getElementById('photoPlaceholder');
+const photoUploadArea = document.getElementById('photoUploadArea');
+
+// 点击上传按钮 → 打开文件选择器
+photoUploadBtn.addEventListener('click', () => {
+    photoInput.click();
+});
+
+// 点击预览区域也可以打开文件选择器
+photoUploadArea.addEventListener('click', (e) => {
+    if (e.target.closest('.photo-actions')) return; // 不拦截按钮点击
+    photoInput.click();
+});
+
+// 文件选择后处理
+photoInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // 验证文件大小（最大 2MB）
+    if (file.size > 2 * 1024 * 1024) {
+        showNotification('照片太大了！请选择小于 2MB 的图片');
+        photoInput.value = '';
+        return;
+    }
+
+    // 读取文件并转为 Base64
+    const reader = new FileReader();
+    reader.onload = (event) => {
+        // 将图片裁剪为正方形并压缩
+        compressAndSquareImage(event.target.result, 300, (compressedData) => {
+            currentAvatarData = compressedData;
+            showPhotoPreview(compressedData);
+        });
+    };
+    reader.readAsDataURL(file);
+});
+
+// 移除照片
+photoRemoveBtn.addEventListener('click', () => {
+    currentAvatarData = '';
+    showPhotoPlaceholder();
+    photoInput.value = '';
+});
+
+// 显示照片预览
+function showPhotoPreview(dataUrl) {
+    photoPreviewImg.src = dataUrl;
+    photoPreviewImg.style.display = 'block';
+    photoPlaceholder.style.display = 'none';
+    photoRemoveBtn.style.display = 'inline-block';
+}
+
+// 显示占位符
+function showPhotoPlaceholder() {
+    photoPreviewImg.src = '';
+    photoPreviewImg.style.display = 'none';
+    photoPlaceholder.style.display = 'flex';
+    photoRemoveBtn.style.display = 'none';
+}
+
+// 将图片压缩并裁剪为正方形
+function compressAndSquareImage(dataUrl, targetSize, callback) {
+    const img = new Image();
+    img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        // 裁剪为正方形（取中心区域）
+        const size = Math.min(img.width, img.height);
+        const sx = (img.width - size) / 2;
+        const sy = (img.height - size) / 2;
+
+        canvas.width = targetSize;
+        canvas.height = targetSize;
+
+        // 绘制裁剪后的正方形图片
+        ctx.drawImage(img, sx, sy, size, size, 0, 0, targetSize, targetSize);
+
+        // 压缩为 JPEG（质量 0.85）
+        const compressed = canvas.toDataURL('image/jpeg', 0.85);
+        callback(compressed);
+    };
+    img.src = dataUrl;
+}
+
+// 加载已有的头像照片
+function loadAvatarPreview() {
+    const data = getData();
+    if (data.avatar) {
+        currentAvatarData = data.avatar;
+        showPhotoPreview(data.avatar);
+    } else {
+        currentAvatarData = '';
+        showPhotoPlaceholder();
+    }
+}

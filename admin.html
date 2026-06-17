@@ -112,6 +112,24 @@
                                 <label class="field-label">个人标签（用 · 分隔）</label>
                                 <input type="text" class="field-input" data-field="tagline" placeholder="程序员 · 创作者 · 探索者">
                             </div>
+                            <div class="field-group">
+                                <label class="field-label">头像照片</label>
+                                <div class="photo-upload-area" id="photoUploadArea">
+                                    <div class="photo-preview" id="photoPreview">
+                                        <img id="photoPreviewImg" src="" alt="头像预览">
+                                        <div class="photo-placeholder" id="photoPlaceholder">
+                                            <span class="photo-placeholder-icon">📷</span>
+                                            <span class="photo-placeholder-text">点击上传照片</span>
+                                            <span class="photo-placeholder-hint">支持 JPG / PNG，建议正方形</span>
+                                        </div>
+                                    </div>
+                                    <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" style="display:none">
+                                    <div class="photo-actions">
+                                        <button class="small-btn" id="photoUploadBtn">📷 选择照片</button>
+                                        <button class="small-btn photo-remove-btn" id="photoRemoveBtn" style="display:none">✕ 移除照片</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

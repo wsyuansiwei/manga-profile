@@ -3,6 +3,82 @@
    爆漫风格 · 黑白配色
    ============================================ */
 
+/* === 照片上传区域 === */
+.photo-upload-area {
+    border: 3px dashed var(--gray-mid);
+    padding: 20px;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+    position: relative;
+}
+
+.photo-upload-area:hover {
+    border-color: var(--black);
+    background: rgba(0,0,0,0.03);
+}
+
+.photo-preview {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 16px;
+    border: 4px solid var(--black);
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--white);
+}
+
+.photo-placeholder-icon {
+    font-size: 36px;
+}
+
+.photo-placeholder-text {
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--black);
+    letter-spacing: 0.1em;
+}
+
+.photo-placeholder-hint {
+    font-size: 11px;
+    color: var(--gray-mid);
+}
+
+.photo-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.photo-remove-btn {
+    background: transparent;
+    color: #c00;
+    border-color: #c00;
+}
+
+.photo-remove-btn:hover {
+    background: #c00;
+    color: var(--white);
+}
+
 :root {
     --black: #0a0a0a;
     --white: #f5f5f5;

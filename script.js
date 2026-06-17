@@ -44,7 +44,8 @@ const DEFAULT_DATA = {
         { icon: '🐙', name: 'GitHub', link: '#' },
         { icon: '📝', name: '博客', link: '#' }
     ],
-    footerCopyright: '© 2024 袁思伟 | 用 ❤️ 和 ☕ 制作'
+    footerCopyright: '© 2024 袁思伟 | 用 ❤️ 和 ☕ 制作',
+    avatar: ''
 };
 
 function getData() {
@@ -86,6 +87,14 @@ function applyDataToPage() {
     const heroTagline = document.querySelector('.hero-tagline');
     if (heroTagline) {
         heroTagline.textContent = data.tagline || DEFAULT_DATA.tagline;
+    }
+
+    // 3.5 头像照片
+    if (data.avatar) {
+        const avatarPlaceholder = document.querySelector('.avatar-placeholder');
+        if (avatarPlaceholder) {
+            avatarPlaceholder.innerHTML = `<img src="${data.avatar}" alt="头像" style="width:100%;height:100%;object-fit:cover;">`;
+        }
     }
 
     // 4. 关于我
