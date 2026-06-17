@@ -1,0 +1,860 @@
+/* ============================================
+   后台管理面板 - CSS 样式
+   爆漫风格 · 黑白配色
+   ============================================ */
+
+:root {
+    --black: #0a0a0a;
+    --white: #f5f5f5;
+    --gray-light: #e0e0e0;
+    --gray-mid: #888;
+    --gray-dark: #333;
+    --panel-bg: #f8f8f8;
+    --border-width: 4px;
+    --manga-font: 'Bangers', cursive;
+    --cn-font: 'Noto Sans SC', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--cn-font);
+    min-height: 100vh;
+}
+
+/* === 通行证验证页面 === */
+.auth-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.auth-card {
+    background: var(--white);
+    border: var(--border-width) solid var(--black);
+    max-width: 480px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 12px 12px 0 var(--black);
+    transform: skewX(-1deg);
+}
+
+.auth-header {
+    background: var(--black);
+    color: var(--white);
+    padding: 30px 24px;
+    text-align: center;
+    position: relative;
+}
+
+.auth-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--white) 0px,
+        var(--white) 10px,
+        transparent 10px,
+        transparent 14px
+    );
+}
+
+.auth-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.auth-title {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+}
+
+.auth-sfx {
+    font-family: var(--manga-font);
+    font-size: 14px;
+    color: var(--gray-mid);
+    margin-top: 8px;
+    letter-spacing: 0.1em;
+}
+
+.auth-body {
+    padding: 30px 24px;
+    transform: skewX(1deg);
+}
+
+.auth-input-group {
+    margin-bottom: 24px;
+}
+
+.auth-label {
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 8px;
+    display: block;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 16px;
+    border: 3px solid var(--black);
+    background: var(--white);
+    color: var(--black);
+    font-size: 24px;
+    font-family: var(--cn-font);
+    letter-spacing: 0.3em;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.auth-input:focus {
+    border-color: var(--gray-dark);
+    box-shadow: 4px 4px 0 var(--gray-mid);
+}
+
+.auth-error {
+    color: #c00;
+    font-size: 13px;
+    margin-top: 8px;
+    font-weight: 700;
+    text-align: center;
+    min-height: 20px;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--black);
+    color: var(--white);
+    border: 3px solid var(--white);
+    font-size: 20px;
+    font-weight: 900;
+    font-family: var(--cn-font);
+    cursor: pointer;
+    position: relative;
+    letter-spacing: 0.3em;
+    transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 6px 6px 0 rgba(255,255,255,0.5);
+}
+
+.auth-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.auth-btn-sfx {
+    font-family: var(--manga-font);
+    font-size: 12px;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}
+
+.auth-footer {
+    padding: 16px 24px;
+    text-align: center;
+    border-top: 2px dashed var(--gray-mid);
+}
+
+.back-link {
+    color: var(--gray-dark);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+}
+
+.back-link:hover {
+    color: var(--black);
+}
+
+/* === 后台管理页面 === */
+.admin-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-header {
+    background: var(--black);
+    border-bottom: var(--border-width) solid var(--white);
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.admin-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.admin-title {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+
+.admin-sfx {
+    font-family: var(--manga-font);
+    font-size: 14px;
+    color: var(--gray-mid);
+}
+
+.admin-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.admin-link {
+    padding: 10px 20px;
+    border: 3px solid var(--white);
+    background: transparent;
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.admin-link:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+.admin-btn {
+    padding: 10px 20px;
+    border: 3px solid var(--gray-mid);
+    background: transparent;
+    color: var(--gray-mid);
+    cursor: pointer;
+    font-weight: 700;
+    font-family: var(--cn-font);
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.admin-btn:hover {
+    border-color: var(--white);
+    color: var(--white);
+}
+
+/* === 后台主体布局 === */
+.admin-body {
+    display: flex;
+    flex: 1;
+}
+
+.admin-sidebar {
+    width: 240px;
+    background: var(--black);
+    border-right: 3px solid var(--gray-dark);
+    padding: 20px 0;
+    flex-shrink: 0;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-item {
+    padding: 14px 24px;
+    color: var(--gray-mid);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    transition: all 0.3s;
+    border-left: 4px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-item:hover {
+    color: var(--white);
+    background: rgba(255,255,255,0.05);
+    border-left-color: var(--white);
+}
+
+.nav-item.active {
+    color: var(--white);
+    background: rgba(255,255,255,0.1);
+    border-left-color: var(--white);
+}
+
+.nav-icon {
+    font-size: 18px;
+}
+
+/* === 编辑区域 === */
+.admin-content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    max-width: 800px;
+}
+
+.edit-section {
+    margin-bottom: 24px;
+}
+
+.section-card {
+    background: var(--white);
+    border: var(--border-width) solid var(--black);
+    overflow: hidden;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
+}
+
+.section-header {
+    background: var(--black);
+    color: var(--white);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section-header h2 {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+
+.section-sfx {
+    font-family: var(--manga-font);
+    font-size: 16px;
+    opacity: 0.5;
+}
+
+.section-body {
+    padding: 24px 20px;
+    color: var(--black);
+}
+
+/* === 字段组件 === */
+.field-group {
+    margin-bottom: 20px;
+}
+
+.field-label {
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--gray-dark);
+    margin-bottom: 8px;
+    display: block;
+    letter-spacing: 0.05em;
+}
+
+.field-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 3px solid var(--black);
+    background: var(--white);
+    color: var(--black);
+    font-size: 16px;
+    font-family: var(--cn-font);
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+.field-input:focus {
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+.field-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 3px solid var(--black);
+    background: var(--white);
+    color: var(--black);
+    font-size: 16px;
+    font-family: var(--cn-font);
+    outline: none;
+    resize: vertical;
+    line-height: 1.8;
+    transition: box-shadow 0.3s;
+}
+
+.field-textarea:focus {
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+/* === 姓名字输入 === */
+.char-inputs {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.char-input-item {
+    position: relative;
+}
+
+.char-input {
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 900;
+    padding: 0;
+    border: 4px solid var(--black);
+    background: var(--white);
+    color: var(--black);
+    outline: none;
+    transition: box-shadow 0.3s;
+}
+
+.char-input:focus {
+    box-shadow: 6px 6px 0 var(--black);
+    transform: scale(1.05);
+}
+
+.char-remove {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 24px;
+    height: 24px;
+    background: var(--black);
+    color: var(--white);
+    border: 2px solid var(--white);
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.small-btn {
+    padding: 8px 16px;
+    background: var(--white);
+    color: var(--black);
+    border: 2px solid var(--black);
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: var(--cn-font);
+    transition: all 0.3s;
+    margin-top: 8px;
+}
+
+.small-btn:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+/* === 技能编辑器 === */
+.skill-edit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 12px;
+    border: 2px solid var(--black);
+    background: var(--white);
+}
+
+.skill-edit-name {
+    flex: 1;
+}
+
+.skill-edit-name input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid var(--black);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    outline: none;
+}
+
+.skill-edit-level {
+    width: 100px;
+}
+
+.skill-edit-level input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid var(--black);
+    font-size: 14px;
+    text-align: center;
+    color: var(--black);
+    outline: none;
+}
+
+.skill-edit-level label {
+    font-size: 11px;
+    color: var(--gray-mid);
+    margin-bottom: 4px;
+    display: block;
+}
+
+.skill-edit-remove {
+    width: 32px;
+    height: 32px;
+    background: var(--black);
+    color: var(--white);
+    border: 2px solid var(--white);
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === 时间线编辑器 === */
+.timeline-edit-item {
+    padding: 12px;
+    border: 2px solid var(--black);
+    background: var(--white);
+    margin-bottom: 12px;
+}
+
+.timeline-edit-item .field-group {
+    margin-bottom: 12px;
+}
+
+.timeline-edit-item .field-group:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-edit-remove {
+    display: inline-block;
+    padding: 6px 12px;
+    background: var(--black);
+    color: var(--white);
+    border: 2px solid var(--white);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.timeline-edit-item label {
+    font-size: 12px;
+}
+
+.emoji-input {
+    width: 60px;
+    text-align: center;
+    padding: 8px;
+    border: 2px solid var(--black);
+    font-size: 20px;
+    outline: none;
+}
+
+/* === 兴趣标签编辑器 === */
+.interest-edit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    border: 2px solid var(--black);
+    background: var(--white);
+}
+
+.interest-edit-name {
+    flex: 1;
+}
+
+.interest-edit-name input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid var(--black);
+    font-size: 14px;
+    outline: none;
+}
+
+.interest-edit-size {
+    display: flex;
+    gap: 6px;
+}
+
+.interest-edit-size label {
+    padding: 6px 10px;
+    border: 2px solid var(--black);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.interest-edit-size input[type="radio"] {
+    display: none;
+}
+
+.interest-edit-size input[type="radio"]:checked + label {
+    background: var(--black);
+    color: var(--white);
+}
+
+.interest-edit-remove {
+    width: 28px;
+    height: 28px;
+    background: var(--black);
+    color: var(--white);
+    border: 2px solid var(--white);
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === 联系方式编辑器 === */
+.contact-edit-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding: 12px;
+    border: 2px solid var(--black);
+    background: var(--white);
+}
+
+.contact-edit-item .field-input {
+    font-size: 14px;
+}
+
+.contact-edit-icon {
+    width: 60px;
+}
+
+.contact-edit-icon input {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    border: 2px solid var(--black);
+    font-size: 20px;
+    outline: none;
+}
+
+.contact-edit-name {
+    flex: 1;
+}
+
+.contact-edit-link {
+    flex: 1.5;
+}
+
+.contact-edit-remove {
+    width: 32px;
+    height: 32px;
+    background: var(--black);
+    color: var(--white);
+    border: 2px solid var(--white);
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* === 保存按钮 === */
+.save-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 3px dashed var(--gray-mid);
+}
+
+.save-btn {
+    padding: 16px 40px;
+    background: var(--white);
+    color: var(--black);
+    border: 4px solid var(--black);
+    font-size: 20px;
+    font-weight: 900;
+    font-family: var(--cn-font);
+    cursor: pointer;
+    position: relative;
+    letter-spacing: 0.1em;
+    transition: all 0.3s;
+    box-shadow: 6px 6px 0 var(--black);
+}
+
+.save-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 10px 10px 0 var(--black);
+}
+
+.save-btn:active {
+    transform: translateY(0);
+    box-shadow: 3px 3px 0 var(--black);
+}
+
+.save-btn-sfx {
+    font-family: var(--manga-font);
+    font-size: 12px;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.3;
+}
+
+.reset-btn {
+    padding: 12px 20px;
+    background: transparent;
+    color: var(--gray-mid);
+    border: 2px solid var(--gray-mid);
+    font-size: 14px;
+    font-weight: 700;
+    font-family: var(--cn-font);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.reset-btn:hover {
+    border-color: var(--white);
+    color: var(--white);
+}
+
+/* === 通知 === */
+.notification {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 200;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification-content {
+    background: var(--white);
+    color: var(--black);
+    border: 4px solid var(--black);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 6px 6px 0 var(--black);
+}
+
+.notification-icon {
+    font-size: 24px;
+}
+
+.notification-text {
+    font-weight: 900;
+    font-size: 16px;
+    letter-spacing: 0.1em;
+}
+
+.notification-sfx {
+    font-family: var(--manga-font);
+    font-size: 12px;
+    opacity: 0.5;
+}
+
+/* === 响应式 === */
+@media (max-width: 768px) {
+    .admin-body {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 3px solid var(--gray-dark);
+        padding: 10px 0;
+    }
+
+    .admin-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 0 16px;
+    }
+
+    .nav-item {
+        padding: 10px 16px;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        white-space: nowrap;
+        font-size: 13px;
+    }
+
+    .nav-item.active {
+        border-bottom-color: var(--white);
+        border-left: none;
+    }
+
+    .admin-content {
+        padding: 16px;
+    }
+
+    .char-input {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+
+    .admin-header-content {
+        flex-wrap: wrap;
+    }
+
+    .admin-actions {
+        flex-wrap: wrap;
+    }
+}
+
+/* === 选区 === */
+::selection {
+    background: var(--white);
+    color: var(--black);
+}
+
+/* === 滚动条 === */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gray-dark);
+    border: 2px solid var(--black);
+}

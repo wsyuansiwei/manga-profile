@@ -1,0 +1,869 @@
+/* ============================================
+   爆漫风格个人介绍 - CSS 样式
+   黑白配色 + 漫画视觉效果
+   ============================================ */
+
+/* === 基础设置 === */
+:root {
+    --black: #0a0a0a;
+    --white: #f5f5f5;
+    --gray-light: #e0e0e0;
+    --gray-mid: #888;
+    --gray-dark: #333;
+    --accent: #fff;
+    --panel-bg: #f8f8f8;
+    --border-width: 4px;
+    --manga-font: 'Bangers', cursive;
+    --cn-font: 'Noto Sans SC', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--cn-font);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* === 速度线背景 === */
+.speed-lines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.15;
+}
+
+/* === 爆漫封面区域 === */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.impact-frame {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    padding: 60px 40px;
+    background: var(--white);
+    border: var(--border-width) solid var(--black);
+    transform: skewX(-2deg);
+    box-shadow: 
+        12px 12px 0 var(--black),
+        -4px -4px 0 var(--black);
+}
+
+.impact-frame::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border: 3px solid var(--black);
+    transform: skewX(2deg);
+}
+
+.impact-frame::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px dashed var(--gray-mid);
+    transform: skewX(1deg);
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    transform: skewX(2deg);
+}
+
+.hero-text-group {
+    flex: 1;
+}
+
+.hero-name {
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 900;
+    color: var(--black);
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+    position: relative;
+    display: flex;
+    gap: 4px;
+}
+
+.name-char {
+    display: inline-block;
+    position: relative;
+    opacity: 0;
+    transform: translateY(40px) scale(0.5);
+    animation: charAppear 0.5s ease-out forwards;
+}
+
+.name-char:nth-child(1) { animation-delay: 0.1s; }
+.name-char:nth-child(2) { animation-delay: 0.3s; }
+.name-char:nth-child(3) { animation-delay: 0.5s; }
+
+.name-char::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: var(--black);
+}
+
+.hero-sound-effect {
+    font-family: var(--manga-font);
+    font-size: clamp(24px, 4vw, 48px);
+    color: var(--black);
+    letter-spacing: 0.1em;
+    margin-top: 10px;
+    position: relative;
+    animation: sfxPulse 1.5s ease-in-out infinite;
+}
+
+.hero-sound-effect::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -8px;
+    right: -8px;
+    bottom: -4px;
+    border: 2px solid var(--black);
+    border-radius: 4px;
+}
+
+.hero-tagline {
+    font-size: clamp(16px, 2vw, 24px);
+    color: var(--gray-dark);
+    font-weight: 700;
+    margin-top: 20px;
+    letter-spacing: 0.15em;
+    border-left: 4px solid var(--black);
+    padding-left: 16px;
+}
+
+.hero-avatar {
+    flex-shrink: 0;
+}
+
+.avatar-frame {
+    width: 180px;
+    height: 180px;
+    border: var(--border-width) solid var(--black);
+    background: var(--white);
+    position: relative;
+    box-shadow: 8px 8px 0 var(--black);
+    transform: rotate(3deg);
+}
+
+.avatar-frame::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 3px dashed var(--black);
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-placeholder svg {
+    width: 80%;
+    height: 80%;
+}
+
+/* 漫画装饰星星 */
+.hero-decorations {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.manga-star {
+    position: absolute;
+    font-size: 32px;
+    color: var(--white);
+    animation: starSpin 3s linear infinite;
+    opacity: 0;
+    animation: starAppear 1s ease-out forwards, starSpin 3s linear infinite;
+}
+
+.star-1 { top: 10%; left: 5%; animation-delay: 0.2s; font-size: 48px; }
+.star-2 { top: 20%; right: 8%; animation-delay: 0.5s; font-size: 36px; }
+.star-3 { bottom: 15%; left: 10%; animation-delay: 0.8s; font-size: 40px; }
+.star-4 { bottom: 25%; right: 5%; animation-delay: 1s; font-size: 28px; }
+
+/* === 漫画面板区域 === */
+.panels-section {
+    position: relative;
+    z-index: 1;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.panel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .panel-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* === 漫画面板样式 === */
+.manga-panel {
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.manga-panel.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.panel-border {
+    background: var(--panel-bg);
+    border: var(--border-width) solid var(--black);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 6px 6px 0 var(--black);
+}
+
+.panel-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 2px,
+            rgba(0,0,0,0.03) 2px,
+            rgba(0,0,0,0.03) 4px
+        );
+    pointer-events: none;
+}
+
+.panel-header {
+    background: var(--black);
+    color: var(--white);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+}
+
+.panel-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--white) 0px,
+        var(--white) 10px,
+        transparent 10px,
+        transparent 14px
+    );
+}
+
+.panel-number {
+    font-family: var(--manga-font);
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.panel-title {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+
+.panel-content {
+    padding: 24px 20px;
+    color: var(--black);
+    position: relative;
+}
+
+/* === 对话气泡 === */
+.speech-bubble {
+    position: relative;
+    background: var(--white);
+    border: 3px solid var(--black);
+    border-radius: 20px;
+    padding: 20px 24px;
+    max-width: 85%;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.speech-bubble.right {
+    margin-left: auto;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 30px;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid var(--black);
+}
+
+.speech-bubble::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 33px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--white);
+    z-index: 1;
+}
+
+/* === 漫画音效文字 === */
+.manga-sfx {
+    font-family: var(--manga-font);
+    color: var(--black);
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 5;
+}
+
+.manga-sfx.tiny { font-size: 14px; transform: rotate(-5deg); }
+.manga-sfx.small { font-size: 18px; transform: rotate(-10deg); }
+.manga-sfx.medium { font-size: 28px; transform: rotate(-15deg); }
+.manga-sfx.big { font-size: 36px; transform: rotate(-8deg); opacity: 0.15; }
+
+/* === 技能条 === */
+.skill-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.skill-bar {
+    flex: 1;
+    height: 24px;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid var(--black);
+}
+
+.skill-fill {
+    height: 100%;
+    background: var(--white);
+    width: 0;
+    transition: width 1.5s ease-out;
+    position: relative;
+}
+
+.skill-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--black) 0px,
+        var(--black) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+    opacity: 0.3;
+}
+
+.skill-fill.filled {
+    width: var(--level);
+}
+
+.skill-name {
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+    min-width: 80px;
+}
+
+/* === 时间线 === */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+}
+
+.timeline-marker {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--black);
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    box-shadow: 3px 3px 0 var(--black);
+}
+
+.timeline-info h3 {
+    font-size: 18px;
+    font-weight: 900;
+    color: var(--black);
+    margin-bottom: 4px;
+}
+
+.timeline-info p {
+    font-size: 14px;
+    color: var(--gray-dark);
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 40px;
+    width: 3px;
+    height: 20px;
+    background: var(--black);
+}
+
+.timeline-item:last-child::after {
+    display: none;
+}
+
+/* === 兴趣标签云 === */
+.interest-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.interest-tag {
+    display: inline-block;
+    border: 3px solid var(--black);
+    padding: 8px 20px;
+    font-weight: 700;
+    background: var(--white);
+    position: relative;
+    cursor: default;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.interest-tag:hover {
+    transform: scale(1.15) rotate(-2deg);
+    box-shadow: 4px 4px 0 var(--black);
+}
+
+.interest-tag::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    border: 1px dashed var(--gray-mid);
+}
+
+.tag-large { font-size: 20px; border-width: 4px; }
+.tag-medium { font-size: 16px; }
+.tag-small { font-size: 13px; border-width: 2px; }
+
+/* === 人生信条 === */
+.motto-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.motto-frame {
+    position: relative;
+    background: var(--black);
+    color: var(--white);
+    padding: 40px 50px;
+    text-align: center;
+    border: 4px solid var(--white);
+    box-shadow: 
+        inset 0 0 30px rgba(255,255,255,0.1),
+        10px 10px 0 rgba(255,255,255,0.3);
+}
+
+.motto-frame::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: 2px dashed var(--gray-mid);
+}
+
+.motto-text {
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    line-height: 1.5;
+}
+
+.motto-sub {
+    font-size: 14px;
+    color: var(--gray-mid);
+    margin-top: 12px;
+    letter-spacing: 0.2em;
+}
+
+/* === 宽面板 === */
+.wide-panel {
+    grid-column: 1 / -1;
+}
+
+/* === 联系方式 === */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 400px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border: 3px solid var(--black);
+    background: var(--black);
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 700;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 rgba(255,255,255,0.3);
+}
+
+.contact-item:hover {
+    transform: translateY(-3px) rotate(-1deg);
+    box-shadow: 6px 6px 0 rgba(255,255,255,0.5);
+    background: var(--white);
+    color: var(--black);
+}
+
+.contact-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+/* === 底部 === */
+.manga-footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px;
+    margin-top: 40px;
+}
+
+.footer-content {
+    position: relative;
+}
+
+.footer-text {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    color: var(--white);
+    margin-bottom: 16px;
+}
+
+.footer-sub {
+    font-size: 14px;
+    color: var(--gray-mid);
+    letter-spacing: 0.1em;
+}
+
+.footer-sfx {
+    font-family: var(--manga-font);
+    font-size: 48px;
+    color: var(--white);
+    opacity: 0.3;
+    margin-top: 20px;
+    animation: sfxPulse 2s ease-in-out infinite;
+}
+
+/* === 转场遮罩 === */
+.transition-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--black);
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+    pointer-events: none;
+}
+
+.transition-mask.hide {
+    opacity: 0;
+}
+
+/* === 悬浮音效 === */
+.floating-sfx {
+    position: fixed;
+    z-index: 100;
+    pointer-events: none;
+    font-family: var(--manga-font);
+    color: var(--white);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* === 动画 === */
+@keyframes charAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.5);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes sfxPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes starAppear {
+    0% { opacity: 0; transform: scale(0) rotate(0deg); }
+    100% { opacity: 0.8; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes starSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+@keyframes impactZoom {
+    0% { transform: scale(3); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* === 面板悬停效果 === */
+.manga-panel:hover .panel-border {
+    box-shadow: 8px 8px 0 var(--black);
+}
+
+.manga-panel:hover .manga-sfx {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* === 滚动条样式 === */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gray-dark);
+    border: 2px solid var(--black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-mid);
+}
+
+/* === 响应式 === */
+@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .hero-tagline {
+        border-left: none;
+        border-bottom: 4px solid var(--black);
+        padding-left: 0;
+        padding-bottom: 8px;
+    }
+
+    .speech-bubble {
+        max-width: 100%;
+    }
+
+    .speech-bubble.right {
+        margin-left: 0;
+    }
+
+    .avatar-frame {
+        width: 140px;
+        height: 140px;
+    }
+
+    .impact-frame {
+        padding: 40px 20px;
+    }
+
+    .motto-frame {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-name {
+        font-size: 42px;
+    }
+
+    .panel-content {
+        padding: 16px 12px;
+    }
+}
+
+/* === 后台入口（隐藏链接） === */
+.admin-entry {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 50;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    pointer-events: none;
+}
+
+.admin-entry.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.admin-entry-link {
+    display: block;
+    padding: 10px 20px;
+    background: var(--white);
+    color: var(--black);
+    border: 3px solid var(--black);
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    box-shadow: 4px 4px 0 var(--black);
+    transition: all 0.3s;
+}
+
+.admin-entry-link:hover {
+    transform: translateY(-3px) rotate(-2deg);
+    box-shadow: 6px 6px 0 var(--black);
+}
+
+/* === 选区高亮（爆漫风格） === */
+::selection {
+    background: var(--black);
+    color: var(--white);
+}
+
+/* === 打印样式 === */
+@media print {
+    .speed-lines, .transition-mask, .floating-sfx {
+        display: none;
+    }
+    body {
+        background: white;
+        color: black;
+    }
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台管理 | 个人介绍</title>
+    <link rel="stylesheet" href="admin.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Bangers&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 通行证验证页面 -->
+    <div class="auth-screen" id="authScreen">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-icon">🔒</div>
+                <h1 class="auth-title">通行证验证</h1>
+                <p class="auth-subtitle">只有持有通行证的人才能进入此地</p>
+            </div>
+            <div class="auth-body">
+                <div class="auth-input-group">
+                    <label class="auth-label">输入通行证密码</label>
+                    <input type="password" class="auth-input" id="passwordInput" placeholder="●●●●●●●●" autocomplete="off">
+                    <div class="auth-error" id="authError"></div>
+                </div>
+                <button class="auth-btn" id="authBtn">
+                    <span>验 证</span>
+                    <div class="auth-btn-sfx">GO!!</div>
+                </button>
+            </div>
+            <div class="auth-footer">
+                <a href="index.html" class="back-link">← 返回前台</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 后台管理页面 -->
+    <div class="admin-screen" id="adminScreen" style="display: none;">
+        <div class="admin-header">
+            <div class="admin-header-content">
+                <div class="admin-title-group">
+                    <h1 class="admin-title">后台管理面板</h1>
+                    <div class="admin-sfx">CONTROL!!</div>
+                </div>
+                <div class="admin-actions">
+                    <a href="index.html" class="admin-link" id="previewBtn">👁 预览前台</a>
+                    <button class="admin-btn logout-btn" id="logoutBtn">🚪 退出后台</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-body">
+            <!-- 侧边导航 -->
+            <div class="admin-sidebar">
+                <nav class="admin-nav">
+                    <a href="#section-basic" class="nav-item active" data-section="basic">
+                        <span class="nav-icon">👤</span> 基本信息
+                    </a>
+                    <a href="#section-about" class="nav-item" data-section="about">
+                        <span class="nav-icon">💬</span> 关于我
+                    </a>
+                    <a href="#section-skills" class="nav-item" data-section="skills">
+                        <span class="nav-icon">⚡</span> 技能树
+                    </a>
+                    <a href="#section-experience" class="nav-item" data-section="experience">
+                        <span class="nav-icon">🔥</span> 战斗历程
+                    </a>
+                    <a href="#section-interests" class="nav-item" data-section="interests">
+                        <span class="nav-icon">✨</span> 热爱领域
+                    </a>
+                    <a href="#section-motto" class="nav-item" data-section="motto">
+                        <span class="nav-icon">💡</span> 人生信条
+                    </a>
+                    <a href="#section-contact" class="nav-item" data-section="contact">
+                        <span class="nav-icon">✉</span> 召唤方式
+                    </a>
+                    <a href="#section-footer" class="nav-item" data-section="footer">
+                        <span class="nav-icon">📝</span> 底部信息
+                    </a>
+                </nav>
+            </div>
+
+            <!-- 编辑区域 -->
+            <div class="admin-content">
+                <!-- 基本信息 -->
+                <div class="edit-section" id="section-basic">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2>① 基本信息</h2>
+                            <div class="section-sfx">NAME!!</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="field-group">
+                                <label class="field-label">姓名（每个字单独输入，用于动画效果）</label>
+                                <div class="char-inputs" id="nameChars">
+                                    <div class="char-input-item">
+                                        <input type="text" class="field-input char-input" data-field="name.char1" maxlength="1" placeholder="第1个字">
+                                    </div>
+                                    <div class="char-input-item">
+                                        <input type="text" class="field-input char-input" data-field="name.char2" maxlength="1" placeholder="第2个字">
+                                    </div>
+                                    <div class="char-input-item">
+                                        <input type="text" class="field-input char-input" data-field="name.char3" maxlength="1" placeholder="第3个字">
+                                    </div>
+                                </div>
+                                <button class="small-btn" id="addCharBtn">+ 增加一个字</button>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">页面标题</label>
+                                <input type="text" class="field-input" data-field="pageTitle" placeholder="姓名 | 个人介绍">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">个人标签（用 · 分隔）</label>
+                                <input type="text" class="field-input" data-field="tagline" placeholder="程序员 · 创作者 · 探索者">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 关于我 -->
+                <div class="edit-section" id="section-about">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2>② 关于我</h2>
+                            <div class="section-sfx">ABOUT!!</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="field-group">
+                                <label class="field-label">自我介绍（每行一段，用换行分隔）</label>
+                                <textarea class="field-textarea" data-field="about" rows="4" placeholder="我是xxx，一名热爱技术和创造的开发者。&#10;相信代码可以改变世界..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 技能树 -->
+                <div class="edit-section" id="section-skills">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2>③ 技能树</h2>
+                            <div class="section-sfx">SKILL!!</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="skills-editor" id="skillsEditor">
+                                <!-- 技能条会被动态生成 -->
+                            </div>
+                            <button class="small-btn" id="addSkillBtn">+ 新增技能</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 战斗历程 -->
+                <div class="edit-section" id="section-experience">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2>④ 战斗历程</h2>
+                            <div class="section-sfx">BATTLE!!</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="timeline-editor" id="timelineEditor">
+                                <!-- 时间线条目会被动态生成 -->
+                            </div>
+                            <button class="small-btn" id="addTimelineBtn">+ 新增经历</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 热爱领域 -->
+                <div class="edit-section" id="section-interests">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2>⑤ 热爱领域</h2>
+                            <div class="section-sfx">LOVE!!</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="interests-editor" id="interestsEditor">
+                                <!-- 兴趣标签会被动态生成 -->
+                            </div>
+                            <button class="small-btn" id="addInterestBtn">+ 新增兴趣</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 人生信条 -->
+                <div class="edit-section" id="section-motto">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2>⑥ 人生信条</h2>
+                            <div class="section-sfx">MOTTO!!</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="field-group">
+                                <label class="field-label">信条内容</label>
+                                <input type="text" class="field-input" data-field="motto" placeholder="一次做对，比反复修补更酷">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">信条署名</label>
+                                <input type="text" class="field-input" data-field="mottoAuthor" placeholder="我的开发哲学">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 召唤方式 -->
+                <div class="edit-section" id="section-contact">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2>⑦ 召唤方式</h2>
+                            <div class="section-sfx">CALL!!</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="contact-editor" id="contactEditor">
+                                <!-- 联系方式会被动态生成 -->
+                            </div>
+                            <button class="small-btn" id="addContactBtn">+ 新增联系方式</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 底部信息 -->
+                <div class="edit-section" id="section-footer">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2>⑧ 底部信息</h2>
+                            <div class="section-sfx">END!!</div>
+                        </div>
+                        <div class="section-body">
+                            <div class="field-group">
+                                <label class="field-label">版权信息</label>
+                                <input type="text" class="field-input" data-field="footerCopyright" placeholder="© 2024 姓名 | 用 ❤️ 和 ☕ 制作">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 保存按钮区域 -->
+                <div class="save-bar">
+                    <button class="save-btn" id="saveBtn">
+                        <span class="save-btn-text">💾 保存所有修改</span>
+                        <div class="save-btn-sfx">SAVE!!</div>
+                    </button>
+                    <button class="reset-btn" id="resetBtn">🔄 恢复默认数据</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 保存成功通知 -->
+        <div class="notification" id="notification">
+            <div class="notification-content">
+                <span class="notification-icon">✅</span>
+                <span class="notification-text">保存成功！数据已更新</span>
+                <div class="notification-sfx">PERFECT!!</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js?v=2"></script>
+</body>
+</html>

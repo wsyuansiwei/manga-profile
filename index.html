@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>袁思伟 | 个人介绍</title>
+    <link rel="stylesheet" href="style.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=Bangers&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 速度线背景 -->
+    <div class="speed-lines" id="speedLines"></div>
+
+    <!-- 爆漫封面区域 -->
+    <section class="hero-section">
+        <div class="impact-frame">
+            <div class="hero-content">
+                <div class="hero-text-group">
+                    <h1 class="hero-name" id="heroName">
+                        <span class="name-char" data-delay="0">袁</span>
+                        <span class="name-char" data-delay="1">思</span>
+                        <span class="name-char" data-delay="2">伟</span>
+                    </h1>
+                    <div class="hero-sound-effect">ドドドド!!</div>
+                    <p class="hero-tagline">程序员 · 创作者 · 探索者</p>
+                </div>
+                <div class="hero-avatar">
+                    <div class="avatar-frame">
+                        <div class="avatar-placeholder">
+                            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="60" cy="45" r="25" fill="white" stroke="black" stroke-width="3"/>
+                                <path d="M 25 110 Q 25 75 60 75 Q 95 75 95 110" fill="white" stroke="black" stroke-width="3"/>
+                                <circle cx="52" cy="40" r="3" fill="black"/>
+                                <circle cx="68" cy="40" r="3" fill="black"/>
+                                <path d="M 55 52 Q 60 57 65 52" stroke="black" stroke-width="2" fill="none"/>
+                                <line x1="35" y1="35" x2="47" y2="38" stroke="black" stroke-width="2"/>
+                                <line x1="73" y1="38" x2="85" y2="35" stroke="black" stroke-width="2"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-decorations">
+            <div class="manga-star star-1">★</div>
+            <div class="manga-star star-2">★</div>
+            <div class="manga-star star-3">★</div>
+            <div class="manga-star star-4">★</div>
+        </div>
+    </section>
+
+    <!-- 漫画面板区域 -->
+    <section class="panels-section">
+        <div class="panel-grid">
+            <!-- 关于我 -->
+            <div class="manga-panel panel-about" data-panel="1">
+                <div class="panel-border">
+                    <div class="panel-header">
+                        <span class="panel-number">①</span>
+                        <h2 class="panel-title">关于我</h2>
+                    </div>
+                    <div class="panel-content">
+                        <div class="speech-bubble right">
+                            <p>我是袁思伟，一名热爱技术和创造的开发者。</p>
+                            <p>相信代码可以改变世界，也相信每个人都有值得分享的故事。</p>
+                        </div>
+                        <div class="manga-sfx small">バーン!!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技能 -->
+            <div class="manga-panel panel-skills" data-panel="2">
+                <div class="panel-border">
+                    <div class="panel-header">
+                        <span class="panel-number">②</span>
+                        <h2 class="panel-title">技能树</h2>
+                    </div>
+                    <div class="panel-content">
+                        <div class="skill-grid">
+                            <div class="skill-item">
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-level="90"></div>
+                                </div>
+                                <span class="skill-name">前端开发</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-level="85"></div>
+                                </div>
+                                <span class="skill-name">后端开发</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-level="80"></div>
+                                </div>
+                                <span class="skill-name">系统设计</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-level="75"></div>
+                                </div>
+                                <span class="skill-name">创意思维</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-level="70"></div>
+                                </div>
+                                <span class="skill-name">团队协作</span>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-bar">
+                                    <div class="skill-fill" data-level="95"></div>
+                                </div>
+                                <span class="skill-name">咖啡饮用</span>
+                            </div>
+                        </div>
+                        <div class="manga-sfx tiny">ガガガ...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 经历 -->
+            <div class="manga-panel panel-experience" data-panel="3">
+                <div class="panel-border">
+                    <div class="panel-header">
+                        <span class="panel-number">③</span>
+                        <h2 class="panel-title">战斗历程</h2>
+                    </div>
+                    <div class="panel-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">⚡</div>
+                                <div class="timeline-info">
+                                    <h3>快手 · 技术开发</h3>
+                                    <p>用代码构建产品，用创新驱动增长</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">🔥</div>
+                                <div class="timeline-info">
+                                    <h3>持续学习中...</h3>
+                                    <p>永远在路上，永远不满足</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">✨</div>
+                                <div class="timeline-info">
+                                    <h3>未来</h3>
+                                    <p>更多精彩正在书写中...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 兴趣 -->
+            <div class="manga-panel panel-interests" data-panel="4">
+                <div class="panel-border">
+                    <div class="panel-header">
+                        <span class="panel-number">④</span>
+                        <h2 class="panel-title">热爱领域</h2>
+                    </div>
+                    <div class="panel-content">
+                        <div class="interest-cloud">
+                            <span class="interest-tag tag-large">编程</span>
+                            <span class="interest-tag tag-medium">动漫</span>
+                            <span class="interest-tag tag-small">咖啡</span>
+                            <span class="interest-tag tag-large">AI</span>
+                            <span class="interest-tag tag-medium">阅读</span>
+                            <span class="interest-tag tag-small">摄影</span>
+                            <span class="interest-tag tag-medium">开源</span>
+                            <span class="interest-tag tag-large">创作</span>
+                            <span class="interest-tag tag-small">游戏</span>
+                        </div>
+                        <div class="manga-sfx medium">メラメラ!!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 人生信条 -->
+            <div class="manga-panel panel-motto wide-panel" data-panel="5">
+                <div class="panel-border">
+                    <div class="panel-header">
+                        <span class="panel-number">⑤</span>
+                        <h2 class="panel-title">人生信条</h2>
+                    </div>
+                    <div class="panel-content">
+                        <div class="motto-display">
+                            <div class="motto-frame">
+                                <p class="motto-text">" 一次做对，比反复修补更酷 "</p>
+                                <p class="motto-sub">—— 我的开发哲学</p>
+                            </div>
+                        </div>
+                        <div class="manga-sfx big">ゴゴゴゴ!!</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 联系方式 -->
+            <div class="manga-panel panel-contact" data-panel="6">
+                <div class="panel-border">
+                    <div class="panel-header">
+                        <span class="panel-number">⑥</span>
+                        <h2 class="panel-title">召唤方式</h2>
+                    </div>
+                    <div class="panel-content">
+                        <div class="contact-grid">
+                            <a href="#" class="contact-item">
+                                <div class="contact-icon">✉</div>
+                                <span>邮件联系</span>
+                            </a>
+                            <a href="#" class="contact-item">
+                                <div class="contact-icon">💬</div>
+                                <span>微信</span>
+                            </a>
+                            <a href="#" class="contact-item">
+                                <div class="contact-icon">🐙</div>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="contact-item">
+                                <div class="contact-icon">📝</div>
+                                <span>博客</span>
+                            </a>
+                        </div>
+                        <div class="manga-sfx small">ビビビ!!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部 -->
+    <footer class="manga-footer">
+        <div class="footer-content">
+            <p class="footer-text">—— THE END ——</p>
+            <p class="footer-sub" id="footerSub" data-click-count="0">© 2024 袁思伟 | 用 ❤️ 和 ☕ 制作</p>
+            <div class="footer-sfx">フィニッシュ!!</div>
+        </div>
+    </footer>
+
+    <!-- 漫画转场遮罩 -->
+    <div class="transition-mask" id="transitionMask"></div>
+
+    <!-- 悬浮漫画效果 -->
+    <div class="floating-sfx" id="floatingSfx"></div>
+
+    <!-- 后台入口（点击底部5次后出现） -->
+    <div class="admin-entry" id="adminEntry">
+        <a href="admin.html" class="admin-entry-link">🔧 进入后台管理</a>
+    </div>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
