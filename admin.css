@@ -412,9 +412,8 @@ body {
 .section-card {
     background: var(--white);
     border: var(--border-width) solid var(--black);
-    overflow: visible;
+    overflow: hidden;
     box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
-    position: relative;
 }
 
 .section-header {

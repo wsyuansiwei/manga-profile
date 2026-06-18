@@ -87,8 +87,8 @@ function checkAuth() {
 function showAdmin() {
     authScreen.style.display = 'none';
     adminScreen.style.display = 'flex';
-    loadFormData();
-    initPhotoUpload(); // 初始化照片上传
+    initPhotoUpload(); // 先初始化照片上传的 DOM 引用
+    loadFormData();    // 再加载表单数据（包括 loadAvatarPreview）
 }
 
 function tryLogin() {
@@ -255,7 +255,7 @@ function syncFormToData() {
     });
 
     // 头像
-    data.avatar = currentAvatarData;
+    data.avatar = currentAvatarData || '';
 
     // 底部
     data.footerCopyright = getFieldValue('footerCopyright');
@@ -549,6 +549,7 @@ function initPhotoUpload() {
 
 // 显示照片预览
 function showPhotoPreview(dataUrl) {
+    if (!photoPreviewImg || !photoPlaceholder || !photoRemoveBtn) return;
     photoPreviewImg.src = dataUrl;
     photoPreviewImg.style.display = 'block';
     photoPlaceholder.style.display = 'none';
@@ -557,6 +558,7 @@ function showPhotoPreview(dataUrl) {
 
 // 显示占位符
 function showPhotoPlaceholder() {
+    if (!photoPreviewImg || !photoPlaceholder || !photoRemoveBtn) return;
     photoPreviewImg.src = '';
     photoPreviewImg.style.display = 'none';
     photoPlaceholder.style.display = 'flex';
