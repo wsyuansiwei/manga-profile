@@ -1,0 +1,42 @@
+{
+  "name": {
+    "chars": ["袁", "思", "伟"]
+  },
+  "pageTitle": "袁思伟 | 个人介绍",
+  "tagline": "程序员 · 创作者 · 探索者",
+  "about": "我是袁思伟，一名热爱技术和创造的开发者。\n相信代码可以改变世界，也相信每个人都有值得分享的故事。",
+  "skills": [
+    { "name": "前端开发", "level": 90 },
+    { "name": "后端开发", "level": 85 },
+    { "name": "系统设计", "level": 80 },
+    { "name": "创意思维", "level": 75 },
+    { "name": "团队协作", "level": 70 },
+    { "name": "咖啡饮用", "level": 95 }
+  ],
+  "experience": [
+    { "emoji": "⚡", "title": "快手 · 技术开发", "desc": "用代码构建产品，用创新驱动增长" },
+    { "emoji": "🔥", "title": "持续学习中...", "desc": "永远在路上，永远不满足" },
+    { "emoji": "✨", "title": "未来", "desc": "更多精彩正在书写中..." }
+  ],
+  "interests": [
+    { "name": "编程", "size": "large" },
+    { "name": "动漫", "size": "medium" },
+    { "name": "咖啡", "size": "small" },
+    { "name": "AI", "size": "large" },
+    { "name": "阅读", "size": "medium" },
+    { "name": "摄影", "size": "small" },
+    { "name": "开源", "size": "medium" },
+    { "name": "创作", "size": "large" },
+    { "name": "游戏", "size": "small" }
+  ],
+  "motto": "一次做对，比反复修补更酷",
+  "mottoAuthor": "我的开发哲学",
+  "contact": [
+    { "icon": "✉", "name": "邮件联系", "link": "#" },
+    { "icon": "💬", "name": "微信", "link": "#" },
+    { "icon": "🐙", "name": "GitHub", "link": "#" },
+    { "icon": "📝", "name": "博客", "link": "#" }
+  ],
+  "footerCopyright": "© 2024 袁思伟 | 用 ❤️ 和 ☕ 制作",
+  "avatar": ""
+}

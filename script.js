@@ -48,21 +48,17 @@ const DEFAULT_DATA = {
     avatar: ''
 };
 
-function getData() {
+function getLocalData() {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
-        try {
-            return JSON.parse(stored);
-        } catch (e) {
-            return DEFAULT_DATA;
-        }
+        try { return JSON.parse(stored); } catch (e) {}
     }
     return DEFAULT_DATA;
 }
 
 // === 动态加载后台数据到页面 ===
-function applyDataToPage() {
-    const data = getData();
+function applyDataToPage(data) {
+    data = data || getLocalData();
 
     // 1. 页面标题
     document.title = data.pageTitle || DEFAULT_DATA.pageTitle;
@@ -197,8 +193,19 @@ function applyDataToPage() {
 
 // === 入场动画 ===
 window.addEventListener('load', () => {
-    // 首先加载后台数据
-    applyDataToPage();
+    // 优先从 data.json 加载已发布数据，失败则用 localStorage
+    fetch('data.json?t=' + Date.now())
+        .then(res => res.ok ? res.json() : null)
+        .then(remoteData => {
+            if (remoteData) {
+                // 有远端数据，同步到 localStorage 并展示
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(remoteData));
+                applyDataToPage(remoteData);
+            } else {
+                applyDataToPage();
+            }
+        })
+        .catch(() => applyDataToPage());
 
     // 移除转场遮罩
     setTimeout(() => {

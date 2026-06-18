@@ -260,6 +260,17 @@
                     </button>
                     <button class="reset-btn" id="resetBtn">🔄 恢复默认数据</button>
                 </div>
+
+                <!-- 发布到线上区域 -->
+                <div class="publish-bar">
+                    <div class="publish-title">🚀 发布到线上</div>
+                    <div class="publish-desc">发布后所有人都能看到最新内容（约 1 分钟生效）</div>
+                    <div class="publish-token-row">
+                        <input type="password" id="githubToken" class="publish-token-input" placeholder="GitHub Personal Access Token（仅需填一次）">
+                        <a href="https://github.com/settings/tokens/new?description=manga-profile&scopes=repo" target="_blank" class="publish-token-help">如何获取？</a>
+                    </div>
+                    <button class="publish-btn" id="publishBtn" onclick="publishToGithub()">🚀 发布到线上</button>
+                </div>
             </div>
         </div>
 

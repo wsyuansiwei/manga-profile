@@ -604,3 +604,93 @@ function loadAvatarPreview() {
         showPhotoPlaceholder();
     }
 }
+
+// === GitHub 发布功能 ===
+const GITHUB_TOKEN_KEY = 'manga_github_token';
+const GITHUB_REPO = 'wsyuansiwei/manga-profile';
+const GITHUB_FILE = 'data.json';
+
+function getGithubToken() {
+    return localStorage.getItem(GITHUB_TOKEN_KEY) || '';
+}
+
+function saveGithubToken(token) {
+    localStorage.setItem(GITHUB_TOKEN_KEY, token);
+}
+
+async function publishToGithub() {
+    const token = document.getElementById('githubToken').value.trim() || getGithubToken();
+    if (!token) {
+        showNotification('请先输入 GitHub Token！', true);
+        return;
+    }
+    // 记住 token
+    saveGithubToken(token);
+    document.getElementById('githubToken').value = token;
+
+    const publishBtn = document.getElementById('publishBtn');
+    publishBtn.textContent = '⏳ 发布中...';
+    publishBtn.disabled = true;
+
+    try {
+        // 先收集当前表单数据
+        const data = syncFormToData();
+
+        // 获取文件当前 SHA（更新文件必须提供 SHA）
+        const getRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`, {
+            headers: {
+                'Authorization': `token ${token}`,
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        });
+
+        let sha = null;
+        if (getRes.ok) {
+            const fileInfo = await getRes.json();
+            sha = fileInfo.sha;
+        }
+
+        // 将数据编码为 Base64
+        const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+
+        // 提交文件
+        const body = {
+            message: `Update profile data - ${new Date().toLocaleString('zh-CN')}`,
+            content: content,
+            ...(sha ? { sha } : {})
+        };
+
+        const putRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${token}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/vnd.github.v3+json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        if (putRes.ok) {
+            // 也保存到 localStorage
+            saveData(data);
+            showNotification('✅ 发布成功！约 1 分钟后所有人可见最新内容');
+        } else {
+            const err = await putRes.json();
+            showNotification(`发布失败：${err.message || putRes.status}`, true);
+        }
+    } catch (e) {
+        showNotification(`发布出错：${e.message}`, true);
+    } finally {
+        publishBtn.textContent = '🚀 发布到线上';
+        publishBtn.disabled = false;
+    }
+}
+
+// 初始化时填入已保存的 token
+window.addEventListener('DOMContentLoaded', () => {
+    const tokenInput = document.getElementById('githubToken');
+    if (tokenInput) {
+        const saved = getGithubToken();
+        if (saved) tokenInput.value = saved;
+    }
+});
