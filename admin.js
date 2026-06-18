@@ -7,6 +7,11 @@
 const ADMIN_PASSWORD = '19911111';
 const STORAGE_KEY = 'manga_profile_data';
 
+// 照片上传相关变量（在顶部声明避免 TDZ 问题）
+let currentAvatarData = '';
+let photoInput = null, photoUploadBtn = null, photoRemoveBtn = null;
+let photoPreviewImg = null, photoPlaceholder = null, photoUploadArea = null;
+
 // === 默认数据（与 index.html 的初始内容一致） ===
 const DEFAULT_DATA = {
     name: {
@@ -498,8 +503,6 @@ document.getElementById('previewBtn').addEventListener('click', (e) => {
 });
 
 // === 照片上传功能 ===
-let currentAvatarData = ''; // 临时存储当前头像数据
-let photoInput, photoUploadBtn, photoRemoveBtn, photoPreviewImg, photoPlaceholder, photoUploadArea;
 
 // 初始化照片上传相关的 DOM 引用和事件绑定
 function initPhotoUpload() {
