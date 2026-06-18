@@ -88,6 +88,7 @@ function showAdmin() {
     authScreen.style.display = 'none';
     adminScreen.style.display = 'flex';
     loadFormData();
+    initPhotoUpload(); // 初始化照片上传
 }
 
 function tryLogin() {
@@ -499,69 +500,76 @@ document.getElementById('previewBtn').addEventListener('click', (e) => {
 
 // === 照片上传功能 ===
 let currentAvatarData = ''; // 临时存储当前头像数据
+let photoInput, photoUploadBtn, photoRemoveBtn, photoPreviewImg, photoPlaceholder, photoUploadArea;
 
-const photoInput = document.getElementById('photoInput');
-const photoUploadBtn = document.getElementById('photoUploadBtn');
-const photoRemoveBtn = document.getElementById('photoRemoveBtn');
-const photoPreviewImg = document.getElementById('photoPreviewImg');
-const photoPlaceholder = document.getElementById('photoPlaceholder');
-const photoUploadArea = document.getElementById('photoUploadArea');
+// 初始化照片上传相关的 DOM 引用和事件绑定
+function initPhotoUpload() {
+    photoInput = document.getElementById('photoInput');
+    photoUploadBtn = document.getElementById('photoUploadBtn');
+    photoRemoveBtn = document.getElementById('photoRemoveBtn');
+    photoPreviewImg = document.getElementById('photoPreviewImg');
+    photoPlaceholder = document.getElementById('photoPlaceholder');
+    photoUploadArea = document.getElementById('photoUploadArea');
 
-// 统一的打开文件选择器方法
-function openFileChooser() {
-    // 使用 setTimeout 确保在用户交互的同步上下文之外也能工作
-    setTimeout(() => {
-        photoInput.value = ''; // 清除之前的值，确保 change 事件能触发
-        photoInput.click();
-    }, 0);
-}
-
-// 点击上传按钮 → 打开文件选择器
-photoUploadBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    openFileChooser();
-});
-
-// 点击预览区域也可以打开文件选择器
-photoUploadArea.addEventListener('click', (e) => {
-    // 不拦截按钮区域的点击
-    if (e.target.closest('.photo-actions') || e.target.closest('button')) return;
-    e.preventDefault();
-    e.stopPropagation();
-    openFileChooser();
-});
-
-// 文件选择后处理
-photoInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    // 验证文件大小（最大 2MB）
-    if (file.size > 2 * 1024 * 1024) {
-        showNotification('照片太大了！请选择小于 2MB 的图片');
-        photoInput.value = '';
+    if (!photoInput || !photoUploadBtn) {
+        console.warn('Photo upload elements not found');
         return;
     }
 
-    // 读取文件并转为 Base64
-    const reader = new FileReader();
-    reader.onload = (event) => {
-        // 将图片裁剪为正方形并压缩
-        compressAndSquareImage(event.target.result, 300, (compressedData) => {
-            currentAvatarData = compressedData;
-            showPhotoPreview(compressedData);
-        });
-    };
-    reader.readAsDataURL(file);
-});
+    // 点击上传按钮 → 打开文件选择器
+    photoUploadBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        openFileChooser();
+    });
 
-// 移除照片
-photoRemoveBtn.addEventListener('click', () => {
-    currentAvatarData = '';
-    showPhotoPlaceholder();
-    photoInput.value = '';
-});
+    // 点击预览区域也可以打开文件选择器
+    photoUploadArea.addEventListener('click', (e) => {
+        // 不拦截按钮区域的点击
+        if (e.target.closest('.photo-actions') || e.target.closest('button')) return;
+        e.preventDefault();
+        e.stopPropagation();
+        openFileChooser();
+    });
+
+    // 文件选择后处理
+    photoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // 验证文件大小（最大 2MB）
+        if (file.size > 2 * 1024 * 1024) {
+            showNotification('照片太大了！请选择小于 2MB 的图片');
+            photoInput.value = '';
+            return;
+        }
+
+        // 读取文件并转为 Base64
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            // 将图片裁剪为正方形并压缩
+            compressAndSquareImage(event.target.result, 300, (compressedData) => {
+                currentAvatarData = compressedData;
+                showPhotoPreview(compressedData);
+            });
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // 移除照片
+    photoRemoveBtn.addEventListener('click', () => {
+        currentAvatarData = '';
+        showPhotoPlaceholder();
+        photoInput.value = '';
+    });
+}
+
+// 统一的打开文件选择器方法
+function openFileChooser() {
+    if (!photoInput) return;
+    photoInput.value = ''; // 清除之前的值，确保 change 事件能触发
+    photoInput.click();
+}
 
 // 显示照片预览
 function showPhotoPreview(dataUrl) {
