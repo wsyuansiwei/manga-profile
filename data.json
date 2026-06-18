@@ -8,10 +8,10 @@
   },
   "pageTitle": "袁思威 | 个人介绍",
   "tagline": "ISFP · 探险家",
-  "about": "我叫袁思威，目前就职于快手，从事HR岗位。\n我喜欢健身、探索美食。",
+  "about": "我是袁思威，一名就职于快手的HR。\n我喜欢健身和探索美食！",
   "skills": [
     {
-      "name": "健身",
+      "name": "撸铁",
       "level": 90
     },
     {
@@ -19,27 +19,27 @@
       "level": 80
     },
     {
-      "name": "桌游",
+      "name": "AI coding（持续提升中）",
+      "level": 60
+    },
+    {
+      "name": "创意思维",
+      "level": 70
+    },
+    {
+      "name": "团队协作",
       "level": 75
     },
     {
       "name": "咖啡饮用",
-      "level": 70
-    },
-    {
-      "name": "沟通协作",
-      "level": 65
-    },
-    {
-      "name": "团队精神",
-      "level": 70
+      "level": 80
     }
   ],
   "experience": [
     {
       "emoji": "⚡",
       "title": "快手 · HRBP",
-      "desc": "HR for HR"
+      "desc": "HRBP for HR"
     },
     {
       "emoji": "🔥",
@@ -48,8 +48,8 @@
     },
     {
       "emoji": "✨",
-      "title": "理想汽车 · HR",
-      "desc": "TA for HR / HRBP for HR"
+      "title": "理想汽车 · HRBP",
+      "desc": "TA for HR / HBRP for HR"
     }
   ],
   "interests": [
@@ -58,36 +58,36 @@
       "size": "large"
     },
     {
-      "name": "AI",
-      "size": "medium"
-    },
-    {
       "name": "动漫",
       "size": "large"
     },
     {
-      "name": "桌游",
-      "size": "medium"
+      "name": "咖啡",
+      "size": "small"
     },
     {
-      "name": "旅游",
-      "size": "small"
+      "name": "AI",
+      "size": "medium"
     },
     {
       "name": "美食",
       "size": "large"
     },
     {
-      "name": "社交",
+      "name": "游泳",
       "size": "medium"
     },
     {
-      "name": "工作",
-      "size": "medium"
+      "name": "游戏",
+      "size": "large"
+    },
+    {
+      "name": "桌游",
+      "size": "large"
     }
   ],
   "motto": "自律者自由",
-  "mottoAuthor": "一名体验派探险者",
+  "mottoAuthor": "一名体验派探险家",
   "contact": [
     {
       "icon": "✉",
@@ -101,7 +101,7 @@
     },
     {
       "icon": "🐧",
-      "name": "QQ：907801089",
+      "name": "QQ:907801089",
       "link": "#"
     }
   ],
