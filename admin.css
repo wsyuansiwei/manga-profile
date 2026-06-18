@@ -351,6 +351,8 @@ body {
     border-right: 3px solid var(--gray-dark);
     padding: 20px 0;
     flex-shrink: 0;
+    position: relative;
+    z-index: 10;
 }
 
 .admin-nav {
@@ -393,6 +395,8 @@ body {
     padding: 24px;
     overflow-y: auto;
     max-width: 800px;
+    position: relative;
+    z-index: 1;
 }
 
 .edit-section {
@@ -402,8 +406,9 @@ body {
 .section-card {
     background: var(--white);
     border: var(--border-width) solid var(--black);
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 6px 6px 0 rgba(0,0,0,0.8);
+    position: relative;
 }
 
 .section-header {
