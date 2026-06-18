@@ -190,6 +190,79 @@ function setPageTitle(value) {
     if (input) input.value = value || '';
 }
 
+// === 从当前表单同步数据（保留未保存的输入） ===
+function syncFormToData() {
+    const data = getData();
+
+    // 姓名
+    const charInputs = document.querySelectorAll('.char-input');
+    data.name.chars = [];
+    charInputs.forEach(input => { data.name.chars.push(input.value); });
+
+    // 基本字段
+    data.pageTitle = getFieldValue('pageTitle');
+    data.tagline = getFieldValue('tagline');
+
+    // 关于我
+    data.about = getFieldValue('about');
+
+    // 技能
+    data.skills = [];
+    document.querySelectorAll('[data-skill-name]').forEach((nameInput, index) => {
+        const levelInput = document.querySelector(`[data-skill-level="${index}"]`);
+        data.skills.push({
+            name: nameInput.value,
+            level: parseInt(levelInput?.value || 50)
+        });
+    });
+
+    // 经历
+    data.experience = [];
+    document.querySelectorAll('[data-exp-emoji]').forEach((emojiInput, index) => {
+        const titleInput = document.querySelector(`[data-exp-title="${index}"]`);
+        const descInput = document.querySelector(`[data-exp-desc="${index}"]`);
+        data.experience.push({
+            emoji: emojiInput.value,
+            title: titleInput?.value || '',
+            desc: descInput?.value || ''
+        });
+    });
+
+    // 兴趣
+    data.interests = [];
+    document.querySelectorAll('[data-interest-name]').forEach((nameInput, index) => {
+        const sizeRadio = document.querySelector(`input[name="interest-size-${index}"]:checked`);
+        data.interests.push({
+            name: nameInput.value,
+            size: sizeRadio?.value || 'medium'
+        });
+    });
+
+    // 信条
+    data.motto = getFieldValue('motto');
+    data.mottoAuthor = getFieldValue('mottoAuthor');
+
+    // 联系方式
+    data.contact = [];
+    document.querySelectorAll('[data-contact-icon]').forEach((iconInput, index) => {
+        const nameInput = document.querySelector(`[data-contact-name="${index}"]`);
+        const linkInput = document.querySelector(`[data-contact-link="${index}"]`);
+        data.contact.push({
+            icon: iconInput.value,
+            name: nameInput?.value || '',
+            link: linkInput?.value || '#'
+        });
+    });
+
+    // 头像
+    data.avatar = currentAvatarData;
+
+    // 底部
+    data.footerCopyright = getFieldValue('footerCopyright');
+
+    return data;
+}
+
 // === 姓名字编辑 ===
 function renderNameChars(chars) {
     const container = document.getElementById('nameChars');
@@ -206,13 +279,13 @@ function renderNameChars(chars) {
 }
 
 document.getElementById('addCharBtn').addEventListener('click', () => {
-    const data = getData();
+    const data = syncFormToData();
     data.name.chars.push('');
     renderNameChars(data.name.chars);
 });
 
 function removeChar(index) {
-    const data = getData();
+    const data = syncFormToData();
     if (data.name.chars.length > 1) {
         data.name.chars.splice(index, 1);
         renderNameChars(data.name.chars);
@@ -241,13 +314,13 @@ function renderSkills(skills) {
 }
 
 document.getElementById('addSkillBtn').addEventListener('click', () => {
-    const data = getData();
+    const data = syncFormToData();
     data.skills.push({ name: '', level: 50 });
     renderSkills(data.skills);
 });
 
 function removeSkill(index) {
-    const data = getData();
+    const data = syncFormToData();
     data.skills.splice(index, 1);
     renderSkills(data.skills);
 }
@@ -279,13 +352,13 @@ function renderTimeline(items) {
 }
 
 document.getElementById('addTimelineBtn').addEventListener('click', () => {
-    const data = getData();
+    const data = syncFormToData();
     data.experience.push({ emoji: '✨', title: '', desc: '' });
     renderTimeline(data.experience);
 });
 
 function removeTimeline(index) {
-    const data = getData();
+    const data = syncFormToData();
     data.experience.splice(index, 1);
     renderTimeline(data.experience);
 }
@@ -316,13 +389,13 @@ function renderInterests(interests) {
 }
 
 document.getElementById('addInterestBtn').addEventListener('click', () => {
-    const data = getData();
+    const data = syncFormToData();
     data.interests.push({ name: '', size: 'medium' });
     renderInterests(data.interests);
 });
 
 function removeInterest(index) {
-    const data = getData();
+    const data = syncFormToData();
     data.interests.splice(index, 1);
     renderInterests(data.interests);
 }
@@ -351,13 +424,13 @@ function renderContact(items) {
 }
 
 document.getElementById('addContactBtn').addEventListener('click', () => {
-    const data = getData();
+    const data = syncFormToData();
     data.contact.push({ icon: '✉', name: '', link: '#' });
     renderContact(data.contact);
 });
 
 function removeContact(index) {
-    const data = getData();
+    const data = syncFormToData();
     data.contact.splice(index, 1);
     renderContact(data.contact);
 }
@@ -382,81 +455,7 @@ resetBtn.addEventListener('click', () => {
 });
 
 function collectFormData() {
-    const data = getData(); // 获取基础结构
-
-    // 姓名
-    const charInputs = document.querySelectorAll('.char-input');
-    data.name.chars = [];
-    charInputs.forEach(input => {
-        data.name.chars.push(input.value);
-    });
-
-    // 基本字段
-    data.pageTitle = getFieldValue('pageTitle');
-    data.tagline = getFieldValue('tagline');
-
-    // 关于我
-    data.about = getFieldValue('about');
-
-    // 技能
-    data.skills = [];
-    const skillNames = document.querySelectorAll('[data-skill-name]');
-    skillNames.forEach((nameInput, index) => {
-        const levelInput = document.querySelector(`[data-skill-level="${index}"]`);
-        data.skills.push({
-            name: nameInput.value,
-            level: parseInt(levelInput?.value || 50)
-        });
-    });
-
-    // 经历
-    data.experience = [];
-    const expEmojis = document.querySelectorAll('[data-exp-emoji]');
-    expEmojis.forEach((emojiInput, index) => {
-        const titleInput = document.querySelector(`[data-exp-title="${index}"]`);
-        const descInput = document.querySelector(`[data-exp-desc="${index}"]`);
-        data.experience.push({
-            emoji: emojiInput.value,
-            title: titleInput?.value || '',
-            desc: descInput?.value || ''
-        });
-    });
-
-    // 兴趣
-    data.interests = [];
-    const interestNames = document.querySelectorAll('[data-interest-name]');
-    interestNames.forEach((nameInput, index) => {
-        const sizeRadio = document.querySelector(`input[name="interest-size-${index}"]:checked`);
-        data.interests.push({
-            name: nameInput.value,
-            size: sizeRadio?.value || 'medium'
-        });
-    });
-
-    // 信条
-    data.motto = getFieldValue('motto');
-    data.mottoAuthor = getFieldValue('mottoAuthor');
-
-    // 联系方式
-    data.contact = [];
-    const contactIcons = document.querySelectorAll('[data-contact-icon]');
-    contactIcons.forEach((iconInput, index) => {
-        const nameInput = document.querySelector(`[data-contact-name="${index}"]`);
-        const linkInput = document.querySelector(`[data-contact-link="${index}"]`);
-        data.contact.push({
-            icon: iconInput.value,
-            name: nameInput?.value || '',
-            link: linkInput?.value || '#'
-        });
-    });
-
-    // 底部
-    data.footerCopyright = getFieldValue('footerCopyright');
-
-    // 头像照片（保存在内存中，非表单字段）
-    data.avatar = currentAvatarData;
-
-    return data;
+    return syncFormToData();
 }
 
 function getFieldValue(field) {
