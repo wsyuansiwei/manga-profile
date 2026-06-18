@@ -516,22 +516,6 @@ function initPhotoUpload() {
         return;
     }
 
-    // 点击上传按钮 → 打开文件选择器
-    photoUploadBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        openFileChooser();
-    });
-
-    // 点击预览区域也可以打开文件选择器
-    photoUploadArea.addEventListener('click', (e) => {
-        // 不拦截按钮区域的点击
-        if (e.target.closest('.photo-actions') || e.target.closest('button')) return;
-        e.preventDefault();
-        e.stopPropagation();
-        openFileChooser();
-    });
-
     // 文件选择后处理
     photoInput.addEventListener('change', (e) => {
         const file = e.target.files[0];
@@ -562,13 +546,6 @@ function initPhotoUpload() {
         showPhotoPlaceholder();
         photoInput.value = '';
     });
-}
-
-// 统一的打开文件选择器方法
-function openFileChooser() {
-    if (!photoInput) return;
-    photoInput.value = ''; // 清除之前的值，确保 change 事件能触发
-    photoInput.click();
 }
 
 // 显示照片预览

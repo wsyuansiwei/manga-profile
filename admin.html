@@ -123,9 +123,9 @@
                                             <span class="photo-placeholder-hint">支持 JPG / PNG，建议正方形</span>
                                         </div>
                                     </div>
-                                    <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;">
                                     <div class="photo-actions">
-                                        <button type="button" class="small-btn" id="photoUploadBtn">📷 选择照片</button>
+                                        <label class="small-btn photo-upload-label" for="photoInput" id="photoUploadBtn">📷 选择照片</label>
+                                        <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" style="display:none">
                                         <button type="button" class="small-btn photo-remove-btn" id="photoRemoveBtn" style="display:none">✕ 移除照片</button>
                                     </div>
                                 </div>
